@@ -4,17 +4,11 @@ import Body from "./components/Body/Body";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 
-const initialState = {
-  currentUser: {
-    name: "Andrew",
-    age: 31,
-    hasEmail: true,
-  },
-  title: "Hello world",
-};
-
 class App extends React.Component {
-  state = initialState;
+  state = {
+    currentUser: null,
+    title: "Hello world",
+  };
 
   updateTitle = () => {
     this.setState({ title: "New Title" });
@@ -27,29 +21,38 @@ class App extends React.Component {
     });
   };
 
+  logInUser = () => {
+    this.setState({
+      name: "Andrew",
+      age: 31,
+      hasEmail: true,
+    });
+  };
+
   render() {
     const { currentUser, title } = this.state;
+    const isLogIn = currentUser !== null;
     return (
       <div className="App">
         <Header />
         <Body />
         <Footer />
         <header className="App-header">{title}</header>
-        <div>Current user name: {currentUser.name}</div>
-        <div>Current user age: {currentUser.age}</div>
+        <div>{!isLogIn && "You are not logged in"}</div>
+        {isLogIn && (
+          <>
+            <div>Current user name: {currentUser.name}</div>
+            <div>Current user age: {currentUser.age}</div>
+            <div>Has email: {currentUser.hasEmail}</div>
+          </>
+        )}
+
         <button onClick={this.updateTitle}>Update title</button>
         <button onClick={this.incrementAge}>Increment age</button>
+        <button onClick={this.logInUser}>Log in</button>
       </div>
     );
   }
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">Hello World!</header>
-//     </div>
-//   );
-// }
 
 export default App;
