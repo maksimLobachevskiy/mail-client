@@ -1,8 +1,22 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-class Header extends Component {
+class Header extends PureComponent {
   render() {
-    return <div>This is a header</div>;
+    const { user } = this.props;
+    const isLogIn = user !== null;
+    return (
+      <>
+        <div>This is a header</div>
+        <div>{!isLogIn && "You are not logged in"}</div>
+        {isLogIn && (
+          <>
+            <div>Current user name: {user.name}</div>
+            <div>Current user age: {user.age}</div>
+            <div>Has email: {user.hasEmail}</div>
+          </>
+        )}
+      </>
+    );
   }
 }
 
