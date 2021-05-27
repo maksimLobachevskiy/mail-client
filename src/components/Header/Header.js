@@ -1,6 +1,12 @@
 import React, { PureComponent } from "react";
 
 class Header extends PureComponent {
+  componentDidMount() {
+    console.log("componentDidMount, Header.js");
+  }
+  componentDidUpdate() {
+    // console.log("componentDidUpdate, Header.js");
+  }
   render() {
     const { user } = this.props;
     const isLogIn = user !== null;

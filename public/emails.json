@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "topic": "Email 1"
+  },
+  {
+    "id": 2,
+    "topic": "Email 2",
+    "hidden": true
+  },
+  {
+    "id": 3,
+    "topic": "Email 3"
+  }
+]
