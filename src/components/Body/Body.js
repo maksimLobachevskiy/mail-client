@@ -1,19 +1,26 @@
 import React, { PureComponent } from "react";
 import EmailCards from "../EmailCrads/EmailCards";
+import PropTypes from "prop-types";
 
 class Body extends PureComponent {
   render() {
-    const { message, emails } = this.props;
+    const { emails } = this.props;
 
     return (
       <div className='app-body'>
-        <h2 className='title'>This is Body</h2>
-        <div>{message}</div>
-        {/* <button onClick={logInUser}>Log in</button> */}
         <EmailCards emails={emails} />
       </div>
     );
   }
 }
 
+Body.propTypes = {
+  message: PropTypes.string,
+  emails: PropTypes.array.isRequired,
+  children: PropTypes.string,
+};
+
+Body.defaultProps = {
+  message: "This is default message in default Props",
+};
 export default Body;

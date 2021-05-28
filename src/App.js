@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.scss";
-import Body from "./components/Body/Body";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Loading from "./components/Loading/Loading";
 import axios from "axios";
+import Sidebar from "./components/Sidebar/Sidebar";
+import AppRoutes from "./routes/AppRoutes";
 
 class App extends React.Component {
   state = {
@@ -16,7 +17,6 @@ class App extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.getCurrentUser();
       this.getEmails();
       this.setState({ isLoading: false });
     }, 1000);
@@ -32,14 +32,8 @@ class App extends React.Component {
     // this.setState({ emails: emails });
   };
 
-  getCurrentUser = () => {
-    axios
-      .get("/api/currentUser")
-      .then((res) => this.setState({ currentUser: res.data }));
-  };
-
   render() {
-    const { currentUser, title, emails, isLoading } = this.state;
+    const { currentUser, emails, isLoading } = this.state;
 
     if (isLoading) {
       return <Loading />;
@@ -49,7 +43,8 @@ class App extends React.Component {
       <div className='App'>
         <header className='App-header'>
           <Header user={currentUser} />
-          <Body message={title} emails={emails} />
+          <Sidebar />
+          <AppRoutes emails={emails} user={currentUser} />
           <Footer />
         </header>
       </div>
