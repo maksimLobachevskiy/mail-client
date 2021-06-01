@@ -1,9 +1,21 @@
-import React, { PureComponent } from "react";
+import React from "react";
+import "./Loading.scss";
 
-class Loading extends PureComponent {
-  render() {
-    return <h2>Loading...</h2>;
-  }
-}
+const Loading = () => {
+  return (
+    <>
+      <div class='lds-roller'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </>
+  );
+};
 
 export default Loading;

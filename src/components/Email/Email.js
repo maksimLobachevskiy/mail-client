@@ -1,22 +1,24 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import starIcon from "../../theme/icons/star.jsx";
+import "./Email.scss";
 
-class Email extends PureComponent {
-  render() {
-    const { email, showText } = this.props;
-
-    if (!email) {
-      return null;
-    }
-
-    return (
-      <div>
-        <div>{email.topic}</div>
-        {showText && <div>{email.text}</div>}
-      </div>
-    );
+const Email = (props) => {
+  const { email, showText } = props;
+  if (!email) {
+    return null;
   }
-}
+
+  return (
+    <div>
+      <div>{email.topic}</div>
+      {showText && <div>{email.text}</div>}
+      <div>
+        {starIcon("red", true)} {starIcon("red", false)}
+      </div>
+    </div>
+  );
+};
 
 Email.propTypes = {
   email: PropTypes.object.isRequired,

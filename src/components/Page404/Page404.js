@@ -1,9 +1,15 @@
-import React, { PureComponent } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-class Page404 extends PureComponent {
-  render() {
-    return <h2>404 - Page not found</h2>;
-  }
-}
+const Page404 = () => {
+  return (
+    <div>
+      <h2>404 - Page not found</h2>
+      <div>
+        <Link to='/inbox'>Back to homepage</Link>
+      </div>
+    </div>
+  );
+};
 
 export default Page404;

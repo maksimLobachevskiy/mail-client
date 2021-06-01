@@ -1,55 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Loading from "./components/Loading/Loading";
 import axios from "axios";
-import Sidebar from "./components/Sidebar/Sidebar";
 import AppRoutes from "./routes/AppRoutes";
 
-class App extends React.Component {
-  state = {
-    currentUser: null,
-    title: "Hello world",
-    emails: [],
-    isLoading: true,
-  };
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [emails, setEmails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  componentDidMount() {
+  const getEmails = () => {
+    axios.get("/api/emails").then((res) => setEmails(res.data));
+  };
+  useEffect(() => {
     setTimeout(() => {
-      this.getEmails();
-      this.setState({ isLoading: false });
+      getEmails();
+      setIsLoading(false);
     }, 1000);
+  }, []);
 
-    // console.log("componentDidMount, App.js");
+  if (isLoading) {
+    return <Loading />;
   }
-  componentDidUpdate() {
-    // console.log("componentDidUpdate, App.js");
-  }
 
-  getEmails = () => {
-    axios.get("/api/emails").then((res) => this.setState({ emails: res.data }));
-    // this.setState({ emails: emails });
-  };
-
-  render() {
-    const { currentUser, emails, isLoading } = this.state;
-
-    if (isLoading) {
-      return <Loading />;
-    }
-
-    return (
-      <div className='App'>
-        <header className='App-header'>
-          <Header user={currentUser} />
-          <Sidebar />
-          <AppRoutes emails={emails} user={currentUser} />
-          <Footer />
-        </header>
-      </div>
-    );
-  }
-}
+  return (
+    <div className='App'>
+      <Header user={currentUser} />
+      <AppRoutes emails={emails} user={currentUser} setUser={setCurrentUser} />
+      <Footer />
+    </div>
+  );
+};
 
 export default App;

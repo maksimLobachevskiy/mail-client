@@ -1,9 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 
-class Sent extends PureComponent {
-  render() {
-    return <h2>Sent</h2>;
-  }
-}
+const Sent = () => {
+  return <h2>Sent</h2>;
+};
 
 export default Sent;

@@ -1,13 +1,11 @@
-import React, { PureComponent } from "react";
+import React from "react";
 
-class Footer extends PureComponent {
-  render() {
-    return (
-      <div>
-        <h3>This is Footer</h3>
-      </div>
-    );
-  }
-}
+const Footer = () => {
+  return (
+    <div>
+      <h5>&copy; DAN-IT Education 2020</h5>
+    </div>
+  );
+};
 
 export default Footer;
