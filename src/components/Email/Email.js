@@ -1,32 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
 import starIcon from "../../theme/icons/star.jsx";
+import { Link } from "react-router-dom";
 import "./Email.scss";
 
 const Email = (props) => {
-  const { email, showText } = props;
+  const { email, showFullPage } = props;
   if (!email) {
     return null;
   }
 
   return (
-    <div>
+    <div className='email-card'>
+      {showFullPage && (
+        <div>
+          <Link to='/inbox/'>Back</Link>
+        </div>
+      )}
       <div>{email.topic}</div>
-      {showText && <div>{email.text}</div>}
+      {showFullPage && <div>{email.text}</div>}
       <div>
         {starIcon("red", true)} {starIcon("red", false)}
       </div>
+      {showFullPage && (
+        <div>
+          <Link to={`/inbox/${email.id - 1}`}>Previous</Link>
+          <Link to={`/inbox/${email.id + 1}`}>Next</Link>
+        </div>
+      )}
     </div>
   );
 };
 
 Email.propTypes = {
   email: PropTypes.object.isRequired,
-  showText: PropTypes.bool,
+  showFullPage: PropTypes.bool,
 };
 
 Email.defaultProps = {
-  showText: false,
+  showFullPage: false,
 };
 
 export default Email;
